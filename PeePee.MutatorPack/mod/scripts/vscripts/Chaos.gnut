@@ -83,7 +83,7 @@ void function swapeasy(entity player1, entity player2){
         Swappos(player1, player2)
 }
 void function SwapThemNow(array<entity> pilots){
-    while(pilots.len() > 0){
+    while(pilots.len() > 1){
         if pilots.len() == 3{
             swapeasy(pilots[0], pilots[1])
             swapeasy(pilots[2], pilots[1])
