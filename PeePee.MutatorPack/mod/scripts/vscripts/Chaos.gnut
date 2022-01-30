@@ -18,10 +18,10 @@ void function Swappos(entity player1, entity player2){
     vector Player2pos = player2.GetOrigin() 
     vector Player1Ang = player1.GetAngles() 
     vector Player2Ang = player2.GetAngles() 
-    float Player1Vel = player1.GetVelocity() 
-    float Player2Vel = player2.GetVelocity() 
+    vector Player1Vel = player1.GetVelocity() 
+    vector Player2Vel = player2.GetVelocity() 
     player1.SetOrigin(Player2pos)
-    player2.Setorigin(Player1pos)
+    player2.SetOrigin(Player1pos)
     player1.SetAngles(Player2Ang)
     player2.SetAngles(Player1Ang)
     player1.SetVelocity(Player2Vel)
@@ -41,7 +41,7 @@ void function SwapGuns(entity player1, entity player2){
     foreach(entity weapon in player1.GetOffhandWeapons()){
         int index = player1offhand.find(weapon)
         player1.TakeWeaponNow(weapon.GetWeaponClassName())
-        player1.GiveOffhandWeapon(player2offhand[index].GetWeaponClassName, index)
+        player1.GiveOffhandWeapon(player2offhand[index].GetWeaponClassName(), index)
     }
     foreach(entity weapon in player2.GetMainWeapons()){
         int index = player2guns.find(weapon)
@@ -52,7 +52,7 @@ void function SwapGuns(entity player1, entity player2){
     foreach(entity weapon in player2.GetOffhandWeapons()){
         int index = player2offhand.find(weapon)
         player2.TakeWeaponNow(weapon.GetWeaponClassName())
-        player2.GiveOffhandWeapon(player1offhand[index].GetWeaponClassName, index)
+        player2.GiveOffhandWeapon(player1offhand[index].GetWeaponClassName(), index)
     }
 }
 void function onstart(){
@@ -84,7 +84,7 @@ void function swapeasy(entity player1, entity player2){
 }
 void function SwapThemNow(array<entity> pilots){
     while(pilots.len() > 1){
-        if pilots.len() == 3{
+        if(pilots.len() == 3){
             swapeasy(pilots[0], pilots[1])
             swapeasy(pilots[2], pilots[1])
             pilots.remove(2)
@@ -96,3 +96,4 @@ void function SwapThemNow(array<entity> pilots){
         pilots.remove(1)
         }
 }
+#endif

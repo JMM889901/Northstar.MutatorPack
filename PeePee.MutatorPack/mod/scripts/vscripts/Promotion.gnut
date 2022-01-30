@@ -10,24 +10,27 @@ bool function PromotionEnabled(){
     return GetCurrentPlaylistVarInt("Promotion", 0) == 1
 }
 struct{
-    table<entity,string> items = {}
+    table<entity,array<string> > items = {}
     table<entity,int> stage = {}
-    table<entity<array<array<entity> > > mods = {}
-}
+    table<array<array<string> > > mods = {}
+} file
 #if SERVER
 void function Respawn(entity player){
     if(PromotionEnabled()){
     array<string> Gear= []
-    array<entity> Guns = player.GetMainWeapons
-    array<array<entity > > Mods = []
+    array<entity> Guns = player.GetMainWeapons()
+    array<array<string > > Mods = []
     array<entity> Offhand = player.GetOffhandWeapons()
-    Offhand.Remove(OFFHAND_MELEE)
-    Gear.append(guns[0])
+    Offhand.remove(OFFHAND_MELEE)
+    Gear.append(Guns[0].GetWeaponClassName())
     foreach(entity weapon in Guns)
         Mods.append(weapon.GetMods())
     foreach(entity gear in Offhand)
-        Gear.append(gear)
-    Gear.append(Guns[1:])
+        Gear.append(gear.GetWeaponClassName())
+
+    Guns.remove(0)
+    foreach(entity gun in Guns)
+        Gear.append(gun.GetWeaponClassName())    
     file.items[player] <- Gear
     file.stage[player] <- 0
     file.mods[player] <- Mods
@@ -46,24 +49,25 @@ void function Kill(entity victim, entity attacker, var damageInfo){
         delete file.mods[victim]
         if(!(attacker.IsTitan())){
             if(file.stage[attacker] == 0){
-                attacker.TakeWeaponNow(attacker.GetMainWeapons[0].GetWeaponClassName())
-                attacker.GiveWeapon(file.items[attacker][0].GetWeaponClassName(), file.mods[attacker][0])
+                attacker.TakeWeaponNow(attacker.GetMainWeapons()[0].GetWeaponClassName())
+                attacker.GiveWeapon(file.items[attacker][0], file.mods[attacker][0])
             }
             if(file.stage[attacker] == 1){
-                attacker.TakeWeaponNow(attacker.GetOffhandWeapons[0].GetWeaponClassName())
-                attacker.GiveOffhandWeapon(file.items[attacker][1].GetWeaponClassName(), 0)
+                attacker.TakeWeaponNow(attacker.GetOffhandWeapons()[0].GetWeaponClassName())
+                attacker.GiveOffhandWeapon(file.items[attacker][1], 0)
             }
             if(file.stage[attacker] == 2){
-                attacker.TakeWeaponNow(attacker.GetOffhandWeapons[1].GetWeaponClassName())
-                attacker.GiveOffhandWeapon(file.items[attacker][2].GetWeaponClassName(), 1)
+                attacker.TakeWeaponNow(attacker.GetOffhandWeapons()[1].GetWeaponClassName())
+                attacker.GiveOffhandWeapon(file.items[attacker][2], 1)
             }
             if(file.stage[attacker] == 3){
-                attacker.GiveWeapon(file.items[attacker][3].GetWeaponClassName(), file.mods[attacker][1])
+                attacker.GiveWeapon(file.items[attacker][3], file.mods[attacker][1])
             }
             if(file.stage[attacker] == 4){
-                attacker.GiveWeapon(file.items[attacker][4].GetWeaponClassName(), file.mods[attacker][2])
+                attacker.GiveWeapon(file.items[attacker][4], file.mods[attacker][2])
             }
         }
         file.stage[attacker] = file.stage[attacker]+1
     }
 }
+#endif

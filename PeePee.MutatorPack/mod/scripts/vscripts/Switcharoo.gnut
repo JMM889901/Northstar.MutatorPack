@@ -16,3 +16,4 @@ void function Swap(entity victim, entity attacker, var damageInfo){
     attacker.SetVelocity(victim.GetVelocity())
     }
 }
+#endif
