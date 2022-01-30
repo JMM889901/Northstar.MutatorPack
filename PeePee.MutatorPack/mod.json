@@ -26,6 +26,28 @@
 			"ServerCallback": {
 				"After": "TwinGrenades_Init"
 			}
+		},
+		{
+			"Path": "Chaos.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "Chaos_Init"
+			},
+
+			"ServerCallback": {
+				"After": "Chaos_Init"
+			}
+		},
+		{
+			"Path": "Switcharoo.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "Switcharoo_Init"
+			},
+
+			"ServerCallback": {
+				"After": "Switcharoo_Init"
+			}
 		}
 	],
 
