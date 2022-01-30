@@ -15,6 +15,17 @@
 			"ServerCallback": {
 				"After": "TwinTacticals_Init"
 			}
+		},
+		{
+			"Path": "TwinGrenades.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "TwinGrenades_Init"
+			},
+
+			"ServerCallback": {
+				"After": "TwinGrenades_Init"
+			}
 		}
 	],
 
