@@ -1,0 +1,24 @@
+{
+	"Name" : "Mutator Pack",
+	"Description" : "Adds new mutators for private matches",
+	"Version": "0.3.5",
+	"LoadPriority": 1,
+
+	"Scripts": [
+		{
+			"Path": "TwinTacticals.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "TwinTacticals_Init"
+			},
+
+			"ServerCallback": {
+				"After": "TwinTacticals_Init"
+			}
+		}
+	],
+
+	"Localisation": [
+		"resource/MutatorPack_localisation_%language%.txt"
+	]
+}
