@@ -48,6 +48,17 @@
 			"ServerCallback": {
 				"After": "Switcharoo_Init"
 			}
+		},
+		{
+			"Path": "Promotion.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "Promotion_Init"
+			},
+
+			"ServerCallback": {
+				"After": "Promotion_Init"
+			}
 		}
 	],
 
