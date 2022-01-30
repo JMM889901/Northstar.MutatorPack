@@ -64,11 +64,13 @@ void function cycle(){
         array<entity> titans = []
         array<entity> pilots = []
         foreach(entity player in GetPlayerArray()){
+            if(IsAlive(player)){
             if(player.IsTitan())
                 titans.append(player)
             else
                 pilots.append(player)
         }
+    }
         titans.randomize()
         pilots.randomize()
         SwapThemNow(pilots)
