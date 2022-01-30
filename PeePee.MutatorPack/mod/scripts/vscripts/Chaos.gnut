@@ -92,8 +92,8 @@ void function SwapThemNow(array<entity> pilots){
         else{
             swapeasy(pilots[0], pilots[1])
         }
-        pilots.remove(0)
         pilots.remove(1)
+        pilots.remove(0)
         }
 }
 #endif
