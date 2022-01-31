@@ -1,5 +1,6 @@
 global function Chaos_Init
 void function Chaos_Init(){
+    AddPrivateMatchModeSettingEnum("#MODE_SETTING_CATEGORY_RIFFPACK", "--------Chaos-------", ["#SETTING_DISABLED"], "0")
     AddPrivateMatchModeSettingEnum("#MODE_SETTING_CATEGORY_RIFFPACK", "ChaosPos", ["#SETTING_DISABLED", "#SETTING_ENABLED"], "0")
     AddPrivateMatchModeSettingEnum("#MODE_SETTING_CATEGORY_RIFFPACK", "ChaosGuns", ["#SETTING_DISABLED", "#SETTING_ENABLED"], "0")
     #if SERVER

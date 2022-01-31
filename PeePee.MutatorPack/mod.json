@@ -59,6 +59,28 @@
 			"ServerCallback": {
 				"After": "Promotion_Init"
 			}
+		},
+		{
+			"Path": "stealing.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "WeaponStealing_Init"
+			},
+
+			"ServerCallback": {
+				"After": "WeaponStealing_Init"
+			}
+		},
+		{
+			"Path": "acceleration.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "Acceleration_Init"
+			},
+
+			"ServerCallback": {
+				"After": "Acceleration_Init"
+			}
 		}
 	],
 
