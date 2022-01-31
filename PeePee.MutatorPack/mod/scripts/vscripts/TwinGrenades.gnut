@@ -33,12 +33,14 @@ array<string> pilotAbility = [
 #if SERVER
 void function Respawn(entity player){
     if(TwinNadesEnabled()){
-    string offhand = player.GetOffhandWeapons()[OFFHAND_LEFT].GetWeaponClassName()
-    player.TakeWeaponNow(offhand)
-    if(pilotNades[pilotAbility.find(offhand)] == player.GetOffhandWeapons()[OFFHAND_RIGHT].GetWeaponClassName())
-        player.GiveOffhandWeapon(pilotNades[pilotAbility.find(offhand)+1], OFFHAND_LEFT)
-    else
-        player.GiveOffhandWeapon(pilotNades[pilotAbility.find(offhand)], OFFHAND_LEFT)
+        string offhand = player.GetOffhandWeapons()[OFFHAND_LEFT].GetWeaponClassName()
+        if(offhand in pilotAbility){
+            player.TakeWeaponNow(offhand)
+            if(pilotNades[pilotAbility.find(offhand)] == player.GetOffhandWeapons()[OFFHAND_RIGHT].GetWeaponClassName())
+                player.GiveOffhandWeapon(pilotNades[pilotAbility.find(offhand)+1], OFFHAND_LEFT)
+            else
+                player.GiveOffhandWeapon(pilotNades[pilotAbility.find(offhand)], OFFHAND_LEFT)
+        }
     }
 }
 #endif
