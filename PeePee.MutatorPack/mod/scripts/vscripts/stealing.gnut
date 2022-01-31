@@ -45,7 +45,7 @@ bool function ValidSteal(entity victim, entity attacker){
 	return false
 }
 //Core
-void function StealWeapons(entity victim, entity attacker){
+void function StealWeapons(entity victim, entity attacker, var damageinfo){
 	if(StealAbilitiesEnabled() && ValidSteal(victim, attacker) && !(victim.IsTitan())) //some titan abilities cause crashes sadge
 		SwapAbilities(victim, attacker)
 	if(StealWeaponsEnabled() && ValidSteal(victim, attacker))

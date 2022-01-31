@@ -40,7 +40,7 @@ void function resetspeed(entity player){
         file.boosts[player] <- 0
 }
 void function SetSpeed(entity player){
-    if(player.Istitan() && !(TitanSpeedEnabled()))
+    if(player.IsTitan() && !(TitanSpeedEnabled()))
          StatusEffect_StopAll( player, eStatusEffect.speed_boost )
     else{
         increasespeed(player, 0) //stops crashes on startup and im too lazy to make a better solution
@@ -48,7 +48,7 @@ void function SetSpeed(entity player){
     }
 }
 //core
-void function Accelerate(entity victim, entity attacker){
+void function Accelerate(entity victim, entity attacker, var damageinfo){
     if ( !victim.IsPlayer() || !attacker.IsPlayer() || GetGameState() != eGameState.Playing )
 		return 
     if(StealSpeedEnabled() && victim in file.boosts)
