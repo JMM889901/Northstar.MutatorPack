@@ -17,3 +17,7 @@ Chaos: every 30 seconds swap locations, direction, velocity and optionally gear 
 Twin grenades: replaces your tactical with a grenade, different tacticals give different grenades
 
 Twin Tacticals: replace your grenade with a tactical, different grenades give different tacticals
+
+Assimilation: steal loadouts on kill
+
+Acceleration: Increase speed on kill
