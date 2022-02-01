@@ -27,7 +27,8 @@ void function SwapWeapons(entity victim, entity attacker){
 	foreach(entity weapon in attacker.GetMainWeapons()){
 		attacker.TakeWeaponNow(weapon.GetWeaponClassName())}
 	foreach(entity weapon in victim.GetMainWeapons()){
-		attacker.GiveWeapon(weapon.GetWeaponClassName(), weapon.GetMods())}
+		attacker.GiveWeapon(weapon.GetWeaponClassName(), weapon.GetMods())
+		}
 }
 void function SwapAbilities(entity victim, entity attacker){
 	foreach(entity offhand in victim.GetOffhandWeapons()){
@@ -45,8 +46,24 @@ bool function ValidSteal(entity victim, entity attacker){
 		return true
 	return false
 }
+void function debug(entity victim, entity attacker){
+	print("victim weapons")
+	foreach(entity weapon in victim.GetMainWeapons()){
+		print(weapon.GetWeaponClassName())
+		foreach(entity mod in weapon.GetMods())
+			print(mod)
+	}
+	print("attacker weapons")
+	foreach(entity weapon in attacker.GetMainWeapons()){
+		print(weapon.GetWeaponClassName())
+		foreach(entity mod in weapon.GetMods())
+			print(mod)
+	}
+}
 //Core
 void function StealWeapons(entity victim, entity attacker, var damageinfo){
+	if(PeePeeDebugEnabled())
+		debug(victim, attacker)
 	if(StealAbilitiesEnabled() && ValidSteal(victim, attacker) && !(victim.IsTitan())) //some titan abilities cause crashes sadge
 		SwapAbilities(victim, attacker)
 	if(StealWeaponsEnabled() && ValidSteal(victim, attacker))

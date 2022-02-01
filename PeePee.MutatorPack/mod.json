@@ -81,6 +81,17 @@
 			"ServerCallback": {
 				"After": "Acceleration_Init"
 			}
+		},
+		{
+			"Path": "debugstuff.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "Debug_Init"
+			},
+
+			"ServerCallback": {
+				"After": "Debug_Init"
+			}
 		}
 	],
 
