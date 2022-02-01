@@ -16,11 +16,11 @@ struct{
 } file
 //bools
 	bool function StealSpeedEnabled() {
-		return GetCurrentPlaylistVarInt("steal_abilities", 0) == 1
+		return GetCurrentPlaylistVarInt("steal_speed", 0) == 1
 	}
 
 	bool function GainSpeedEnabled() {
-		return GetCurrentPlaylistVarInt("steal_weapons", 0) == 1
+		return GetCurrentPlaylistVarInt("gain_speed", 0) == 1
 	}
 	bool function TitanSpeedEnabled() {
 		return GetCurrentPlaylistVarInt("unrestricted_stealing", 0) == 1
