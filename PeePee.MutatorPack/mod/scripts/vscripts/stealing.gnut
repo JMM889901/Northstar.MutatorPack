@@ -35,7 +35,8 @@ void function SwapAbilities(entity victim, entity attacker){
 		attacker.TakeWeaponNow(offhand.GetWeaponClassName())}
 	foreach(entity offhand in victim.GetOffhandWeapons()){
 		int index = victim.GetOffhandWeapons().find(offhand)
-		attacker.GiveOffhandWeapon(offhand.GetWeaponClassName(), index)
+		if(index != OFFHAND_INVENTORY){
+		attacker.GiveOffhandWeapon(offhand.GetWeaponClassName(), index)}
 	}
 }
 bool function ValidSteal(entity victim, entity attacker){
