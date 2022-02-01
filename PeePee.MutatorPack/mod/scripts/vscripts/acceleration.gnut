@@ -23,7 +23,7 @@ struct{
 		return GetCurrentPlaylistVarInt("gain_speed", 0) == 1
 	}
 	bool function TitanSpeedEnabled() {
-		return GetCurrentPlaylistVarInt("unrestricted_stealing", 0) == 1
+		return GetCurrentPlaylistVarInt("titans_gain_speed", 0) == 1
 	}
 #if SERVER
 //functions
