@@ -56,7 +56,7 @@ void function debug(entity victim, entity attacker){
 	print("attacker weapons")
 	foreach(entity weapon in attacker.GetMainWeapons()){
 		print(weapon.GetWeaponClassName())
-		foreach(entity mod in weapon.GetMods())
+		foreach(string mod in weapon.GetMods())
 			print(mod)
 	}
 }
