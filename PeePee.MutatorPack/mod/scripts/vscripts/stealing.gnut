@@ -32,6 +32,7 @@ void function SwapWeapons(entity victim, entity attacker){
 }
 void function SwapAbilities(entity victim, entity attacker){
 	foreach(entity offhand in attacker.GetOffhandWeapons()){
+		if(attacker.GetOffhandWEapons().find(offhand) != OFFHAND_INVENTORY){
 		attacker.TakeWeaponNow(offhand.GetWeaponClassName())}
 	foreach(entity offhand in victim.GetOffhandWeapons()){
 		int index = victim.GetOffhandWeapons().find(offhand)
