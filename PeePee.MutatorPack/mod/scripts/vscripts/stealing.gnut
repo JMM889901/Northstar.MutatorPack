@@ -32,13 +32,14 @@ void function SwapWeapons(entity victim, entity attacker){
 }
 void function SwapAbilities(entity victim, entity attacker){
 	foreach(entity offhand in attacker.GetOffhandWeapons()){
-		if(attacker.GetOffhandWEapons().find(offhand) != OFFHAND_INVENTORY){
+		if(attacker.GetOffhandWeapons().find(offhand) != OFFHAND_INVENTORY){
 		attacker.TakeWeaponNow(offhand.GetWeaponClassName())}
 	foreach(entity offhand in victim.GetOffhandWeapons()){
 		int index = victim.GetOffhandWeapons().find(offhand)
 		if(index != OFFHAND_INVENTORY){
 		attacker.GiveOffhandWeapon(offhand.GetWeaponClassName(), index)}
 	}
+}
 }
 bool function ValidSteal(entity victim, entity attacker){
 	if ( !victim.IsPlayer() || !attacker.IsPlayer() || GetGameState() != eGameState.Playing )
