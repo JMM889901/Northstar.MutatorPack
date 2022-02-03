@@ -31,15 +31,16 @@ void function SwapWeapons(entity victim, entity attacker){
 		}
 }
 void function SwapAbilities(entity victim, entity attacker){
-	foreach(entity offhand in attacker.GetOffhandWeapons()){
-		if(attacker.GetOffhandWeapons().find(offhand) != OFFHAND_INVENTORY){
-		attacker.TakeWeaponNow(offhand.GetWeaponClassName())}
-	foreach(entity offhand in victim.GetOffhandWeapons()){
-		int index = victim.GetOffhandWeapons().find(offhand)
-		if(index != OFFHAND_INVENTORY){
-		attacker.GiveOffhandWeapon(offhand.GetWeaponClassName(), index)}
+	for ( int i = 0; i <= OFFHAND_MELEE; i++ ) // OFFHAND_MELEE is the largest
+	{
+	  if ( i != OFFHAND_INVENTORY )
+	  {
+		if ( IsValid( attacker.GetOffhandWeapon( i ) ))
+		  attacker.TakeWeaponNow( attacker.GetOffhandWeapon(i).GetWeaponClassName() )
+		if ( IsValid( victim.GetOffhandWeapon( i ) ))
+		  attacker.GiveOffhandWeapon( victim.GetOffhandWeapon( i ).GetWeaponClassName(), i)
+	  }
 	}
-}
 }
 bool function ValidSteal(entity victim, entity attacker){
 	if ( !victim.IsPlayer() || !attacker.IsPlayer() || GetGameState() != eGameState.Playing )
