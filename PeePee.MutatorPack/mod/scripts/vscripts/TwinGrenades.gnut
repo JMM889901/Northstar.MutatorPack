@@ -3,6 +3,7 @@ void function TwinGrenades_Init(){
     AddPrivateMatchModeSettingEnum("#MODE_SETTING_CATEGORY_RIFFPACK", "TwinGrenades", ["#SETTING_DISABLED", "#SETTING_ENABLED"], "0")
     #if SERVER
     AddCallback_OnPlayerRespawned(Respawn)
+    AddCallback_OnPlayerGetsNewPilotLoadout(OnPlayerChangeLoadout)
     #endif
 }
 
@@ -42,5 +43,9 @@ void function Respawn(entity player){
                 player.GiveOffhandWeapon(pilotNades[pilotAbility.find(offhand)], OFFHAND_LEFT)
         }
     }
+}
+void function OnPlayerChangeLoadout(entity player, PilotLoadoutDef loadout){
+    if(player.GetOffhandWeapons().len() != 0){
+    Respawn(player)}
 }
 #endif
