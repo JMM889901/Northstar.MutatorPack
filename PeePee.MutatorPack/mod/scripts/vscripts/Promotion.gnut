@@ -4,6 +4,7 @@ void function Promotion_Init(){
     #if SERVER
     AddCallback_OnPlayerKilled(Kill)
     AddCallback_OnPlayerRespawned(Respawn)
+    AddCallback_OnPlayerGetsNewPilotLoadout( OnPlayerChangeLoadout)
     #endif
 }
 bool function PromotionEnabled(){
@@ -16,12 +17,15 @@ struct{
 } file
 #if SERVER
 void function Respawn(entity player){
-    if(PromotionEnabled()){
+    if(PromotionEnabled() && player.GetOffhandWeapons().len() != 0 && player.GetMainWeapons().len() !=0){
     array<string> Gear= []
     array<entity> Guns = player.GetMainWeapons()
     array<array<string > > Mods = []
     array<entity> Offhand = player.GetOffhandWeapons()
-    Offhand.remove(OFFHAND_MELEE)
+    foreach(entity offhand in Offhand){
+        if(offhand.GetWeaponClassName() == "melee_pilot_emptyhanded")
+            Offhand.remove(Offhand.find(offhand))
+    }
     Gear.append(Guns[0].GetWeaponClassName())
     foreach(entity weapon in Guns)
         Mods.append(weapon.GetMods())
@@ -40,14 +44,22 @@ void function Respawn(entity player){
     foreach(entity weapon in player.GetOffhandWeapons())
         player.TakeWeaponNow(weapon.GetWeaponClassName())
     player.GiveWeapon("mp_weapon_car")
+    player.GiveOffhandWeapon("melee_pilot_emptyhanded", OFFHAND_MELEE)
     }
 }
+void function OnPlayerChangeLoadout(entity player, PilotLoadoutDef loadout){
+    if(PromotionEnabled() && player.GetOffhandWeapons().len() != 0 && player.GetMainWeapons().len() !=0 && player in file.items && player in file.mods && player in file.stage){
+    delete file.items[player]
+    delete file.stage[player]
+    delete file.mods[player]
+    Respawn(player)}
+}
 void function Kill(entity victim, entity attacker, var damageInfo){
-    if(PromotionEnabled()){
+    if(PromotionEnabled() && victim.IsPlayer() && GetGameState() == eGameState.Playing ){
         delete file.items[victim]
         delete file.stage[victim]
         delete file.mods[victim]
-        if(!(attacker.IsTitan())){
+        if(!(attacker.IsTitan()) && attacker.IsPlayer()){
             if(file.stage[attacker] == 0){
                 attacker.TakeWeaponNow(attacker.GetMainWeapons()[0].GetWeaponClassName())
                 attacker.GiveWeapon(file.items[attacker][0], file.mods[attacker][0])
