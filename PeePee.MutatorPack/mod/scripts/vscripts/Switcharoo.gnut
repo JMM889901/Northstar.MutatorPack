@@ -10,7 +10,7 @@ bool function SwitcharooEnabled(){
 }
 #if SERVER
 void function Swap(entity victim, entity attacker, var damageInfo){
-    if(SwitcharooEnabled()){
+    if(SwitcharooEnabled() && attacker.IsPlayer() && victim.IsPlayer()){
     attacker.SetOrigin(victim.GetOrigin())
     attacker.SetAngles(victim.GetAngles())
     attacker.SetVelocity(victim.GetVelocity())
