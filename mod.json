@@ -1,7 +1,7 @@
 {
 	"Name" : "Mutator Pack",
 	"Description" : "Adds new mutators for private matches",
-	"Version": "0.5.1",
+	"Version": "0.5.3",
 	"LoadPriority": 1,
 
 	"Scripts": [
