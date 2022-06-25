@@ -1,7 +1,7 @@
 {
 	"Name" : "Mutator Pack",
 	"Description" : "Adds new mutators for private matches",
-	"Version": "0.5.0",
+	"Version": "0.5.1",
 	"LoadPriority": 1,
 
 	"Scripts": [
@@ -91,6 +91,17 @@
 
 			"ServerCallback": {
 				"After": "Explosive_init"
+			}
+		},
+		{
+			"Path": "ClassWar.gnut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "ClassWar_init"
+			},
+
+			"ServerCallback": {
+				"After": "ClassWar_init"
 			}
 		},
 		{
